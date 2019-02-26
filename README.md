@@ -1,44 +1,52 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Refactoring Kata Test
 
-## Available Scripts
+## Introduction
 
-In the project directory, you can run:
+We have a `FilterDomain` component in `src/components/DomainFilter/DomainFilter.component.tsx` which renders a cluster of 3 select inputs allowing the user to filter by `domain`.
 
-### `npm start`
+A domain is a string provided by an upstream api (in this example, they are hardcoded into `src/index.tsx`) following the following pattern: {country code}_{classification}-{sub classification}, the country code, classification and sub classification being strings containing only uppercase letters (no numbers, no punctuation).
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Each of the 3 selects allow the user to choose one or multiple values from, respectively, the list of all distinct countries represented in the existing domains, the list of all distinct classifications, and the list of all distinct subclassifications.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+Today, this component contains the logic to compute the three lists of distinct values, and we would like to be able to reuse this logic in another component.
 
-### `npm test`
+There is also a weird warning in the console, that nobody seems to understand.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+And there have been reports of bugs by users, but we have not managed to reproduce them.
 
-### `npm run build`
+You can run the project to see this filter component in action
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## System Requirements
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+ - yarn (Tested with 1.13.0)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Installation
 
-### `npm run eject`
+```bash
+yarn
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Run the application
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+yarn start
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Run the tests
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```bash
+yarn test
+```
 
-## Learn More
+## Rules
+There are some rules to follow:
+ - You must commit regularly
+ - You must not modify code when comments explicitly forbid it
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Deliverables
+What do we expect from you:
+ - the link of the git repository
+ - several commits, with an explicit message each time
+ - a file / message / email explaining your process and principles you've followed, and how one developer would go about reusing the feature
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+**Good luck!**
