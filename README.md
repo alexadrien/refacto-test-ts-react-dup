@@ -8,7 +8,11 @@ A domain is a string provided by an upstream api (in this example, they are hard
 
 Each of the 3 selects allow the user to choose one or multiple values from, respectively, the list of all distinct countries represented in the existing domains, the list of all distinct classifications, and the list of all distinct subclassifications.
 
+## Goal of the exercise
+
 Today, this component contains the logic to compute the three lists of distinct values, and we would like to be able to reuse this logic in another component.
+
+²
 
 There is also a weird warning in the console, that nobody seems to understand.
 
