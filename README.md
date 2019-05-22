@@ -12,7 +12,9 @@ Each of the 3 selects allow the user to choose one or multiple values from, resp
 
 Today, this component contains the logic to compute the three lists of distinct values, and we would like to be able to reuse this logic in another component.
 
-²
+We need to have a way to get those 3 lists in another component, on another page of the application.
+
+## Additional context
 
 There is also a weird warning in the console, that nobody seems to understand.
 
