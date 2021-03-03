@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import DomainFilter from './DomainFilter.component';
+import DomainFilter, { domainsToOptions } from './DomainFilter.component';
 
 describe('components', () => {
   describe('DomainFilter', () => {
@@ -8,6 +8,24 @@ describe('components', () => {
       const wrapper = shallow(<DomainFilter domains={['do']} />);
 
       expect(wrapper.find('select')).toHaveLength(3);
+    })
+  })
+
+  describe('options construction', () => {
+    it('should construct the options properly', () => {
+      const res = domainsToOptions([
+        'US_OK-WOK',
+        'FR_NK-WOL',
+        'FR_OK-NPP',
+        'EN_NK-NRP',
+        'EN_BL-WOL',
+      ]);
+
+      expect(res).toEqual({
+        countries: ['US', 'FR', 'EN'],
+        classifications: ['OK', 'NK', 'BL'],
+        subClassifications: ['WOK', 'WOL', 'NPP', 'NRP'],
+      })
     })
   })
 })

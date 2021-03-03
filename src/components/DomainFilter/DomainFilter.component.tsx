@@ -20,29 +20,11 @@ class DomainFilter extends React.Component<Props, State> {
       subClassifications: []
     }
 
-    const s: any = {};
-
-    for(let i = 0; i < domains.length; i++) {
-      if (this.state.countries.indexOf(domains[i].substring(0,2)) <= 0) {
-        this.state.countries.push(domains[i].substring(0,2))
-      }
-      this.state.classifications.push(domains[i].substring(3,5));
-      let flag = false;
-      for(let j = 0; j < this.state.subClassifications.length; j++) {
-        if (this.state.subClassifications[j] == domains[i].substring(6)) {
-          flag = true
-          break;
-        }
-      }
-      if (!flag) {
-        this.state.subClassifications.push(domains[i].substring(6));
-      }
-    }
-
     this.setState({
       ...this.state,
-      classifications: this.state.classifications.filter((e, i, l) => l.indexOf(e) === i),
+      ...domainsToOptions(domains),
     })
+
     this.forceUpdate()
   }
 
@@ -71,6 +53,45 @@ class DomainFilter extends React.Component<Props, State> {
       </select>
     </>)
   }
+}
+
+type Options = {
+  countries: string[],
+  classifications: string[],
+  subClassifications: string[]
+}
+
+/**
+ * Will transform a set of domains into availabale options for country code, classifications, sub classifications.
+ */
+export const domainsToOptions = (domains: string[]): Options => {
+  const options: Options = {
+    countries: [],
+    classifications: [],
+    subClassifications: [],
+  };
+
+  // todo(al): possible to clean this logic?
+  for (let i = 0; i < domains.length; i++) {
+    if (options.countries.indexOf(domains[i].substring(0, 2)) <= 0) {
+      options.countries.push(domains[i].substring(0, 2))
+    }
+    options.classifications.push(domains[i].substring(3, 5));
+    let flag = false;
+    for (let j = 0; j < options.subClassifications.length; j++) {
+      if (options.subClassifications[j] == domains[i].substring(6)) {
+        flag = true
+        break;
+      }
+    }
+    if (!flag) {
+      options.subClassifications.push(domains[i].substring(6));
+    }
+
+    options.classifications = options.classifications.filter((e, i, l) => l.indexOf(e) === i);
+  }
+
+  return options;
 }
 
 export default DomainFilter
