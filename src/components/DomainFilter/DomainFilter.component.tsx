@@ -12,6 +12,7 @@ class DomainFilter extends React.Component<Props, State> {
   render() {
     const { domains } = this.props
 
+    // todo(alexstrat): add memoization here for the peace of mind
     const { countries, classifications, subClassifications } = domainsToOptions(domains);
 
     return (<>
