@@ -51,7 +51,7 @@ export const domainsToOptions = (domains: string[]): Options => {
     subClassifications: [],
   };
 
-  // todo(al): possible to clean this logic?
+  // todo(alexstrat): possible to clean this logic?
   for (let i = 0; i < domains.length; i++) {
     if (options.countries.indexOf(domains[i].substring(0, 2)) <= 0) {
       options.countries.push(domains[i].substring(0, 2))
