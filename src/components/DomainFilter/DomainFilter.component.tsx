@@ -1,39 +1,18 @@
 import React from 'react';
 import { threadId } from 'worker_threads';
 
-interface State {
-  countries: string[],
-  classifications: string[],
-  subClassifications: string[]
-}
+interface State {}
 
 interface Props {
   domains: string[]
 }
 
 class DomainFilter extends React.Component<Props, State> {
-  componentDidMount() {
-    const { domains } = this.props
-    this.state = {
-      countries: [],
-      classifications: [],
-      subClassifications: []
-    }
-
-    this.setState({
-      ...this.state,
-      ...domainsToOptions(domains),
-    })
-
-    this.forceUpdate()
-  }
 
   render() {
-    const {countries, classifications, subClassifications} = this.state || {
-      countries: [],
-      classifications: [],
-      subClassifications: []
-    };
+    const { domains } = this.props
+
+    const { countries, classifications, subClassifications } = domainsToOptions(domains);
 
     return (<>
       <select name="countries" multiple>
