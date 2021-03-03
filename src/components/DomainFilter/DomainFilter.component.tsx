@@ -1,32 +1,56 @@
 import React from 'react';
 import { threadId } from 'worker_threads';
 
-interface State {}
 
-interface Props {
-  domains: string[]
+export type FilterValue = {
+  country: string[],
+  classification: string[],
+  subClassification: string[]
 }
 
-class DomainFilter extends React.Component<Props, State> {
+export const defaultFilterValue: FilterValue = { country: [], classification: [], subClassification: [] }
+
+interface Props {
+  domains: string[];
+  value: FilterValue;
+  onValueChange?: (value: FilterValue) => void;
+}
+
+class DomainFilter extends React.Component<Props> {
 
   render() {
-    const { domains } = this.props
+    const { domains, value, onValueChange } = this.props;
 
     // todo(alexstrat): add memoization here for the peace of mind
     const { countries, classifications, subClassifications } = domainsToOptions(domains);
 
     return (<>
-      <select name="countries" multiple>
+      <select
+        name="countries"
+        multiple
+        value={value.country || undefined}
+        onChange={(e) => onValueChange && onValueChange({...value, country: [e.target.value]})}
+      >
         {countries.map(country => (
           <option value={country} key={country}>{country}</option>
         ))}
       </select>
-      <select name="classifications" multiple>
+      <select
+        name="classifications"
+        multiple
+        value={value.classification || undefined}
+        onChange={(e) => onValueChange && onValueChange({ ...value, classification: [e.target.value] })}
+      >
         {classifications.map(classification => (
           <option value={classification} key={classification}>{classification}</option>
         ))}
       </select>
-      <select name="subClassifications" multiple>
+      <select
+        name="subClassifications"
+        multiple
+        value={value.subClassification || undefined}
+        onChange={(e) => onValueChange && onValueChange({ ...value, subClassification: [e.target.value] })}
+      >
         {subClassifications.map(subClassification => (
           <option value={subClassification} key={subClassification}>{subClassification}</option>
         ))}
