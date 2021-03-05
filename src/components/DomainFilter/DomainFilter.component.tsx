@@ -1,9 +1,12 @@
 import React from 'react';
 
-interface State {
+interface ICountryClassification {
   countries: string[],
   classifications: string[],
   subClassifications: string[]
+}
+
+interface State extends ICountryClassification {
 }
 
 interface Props {
@@ -11,15 +14,18 @@ interface Props {
 }
 
 class DomainFilter extends React.Component<Props, State> {
-  componentDidMount() {
-    const { domains } = this.props
+  constructor(props: Props) {
+    super(props)
+
     this.state = {
       countries: [],
       classifications: [],
       subClassifications: []
     }
+  }
 
-    const s: any = {};
+  componentDidMount() {
+    const { domains } = this.props
 
     for(let i = 0; i < domains.length; i++) {
       if (this.state.countries.indexOf(domains[i].substring(0,2)) <= 0) {
@@ -49,11 +55,7 @@ class DomainFilter extends React.Component<Props, State> {
   }
 
   render() {
-    const {countries, classifications, subClassifications} = this.state || {
-      countries: [],
-      classifications: [],
-      subClassifications: []
-    };
+    const {countries, classifications, subClassifications} = this.state
 
     return (<>
       <select name="countries" multiple>
