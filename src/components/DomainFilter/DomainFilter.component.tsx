@@ -38,10 +38,13 @@ class DomainFilter extends React.Component<Props, State> {
       }
     }
 
+    const classifications = this.state.classifications.filter((e, i, l) => l.indexOf(e) === i)
+
     this.setState({
       ...this.state,
-      classifications: this.state.classifications.filter((e, i, l) => l.indexOf(e) === i),
+      classifications,
     })
+
     this.forceUpdate()
   }
 
