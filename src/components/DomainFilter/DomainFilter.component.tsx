@@ -1,11 +1,5 @@
 import React from 'react';
-import { extractCountriesClassifications } from '../../data/domain';
-
-interface ICountryClassification {
-  countries: string[],
-  classifications: string[],
-  subClassifications: string[]
-}
+import { extractCountriesClassifications, ICountryClassification } from '../../data/domain';
 
 interface State extends ICountryClassification {
 }

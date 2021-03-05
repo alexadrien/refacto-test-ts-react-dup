@@ -1,3 +1,4 @@
+import React, { useContext, useEffect, useState } from "react"
 
 export interface ICountryClassification {
     countries: string[],
@@ -38,4 +39,12 @@ export const extractCountriesClassifications = (domains: string[]): ICountryClas
         ...result,
         classifications
     }
+}
+
+const countriesClassificationsContext = React.createContext<ICountryClassification>({ countries: [], classifications: [], subClassifications: [] })
+
+export const CountriesClassificationsProvider = countriesClassificationsContext.Provider;
+
+export const useCountriesClassifications = (): ICountryClassification => {
+    return useContext(countriesClassificationsContext)
 }
